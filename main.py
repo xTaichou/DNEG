@@ -1,3 +1,8 @@
+"""
+This is just a file I used to test parts of the other projects such as the splitting and replacing of the calculator
+equations.
+"""
+
 import random
 import urllib.request
 from random_word import RandomWords
