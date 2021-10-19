@@ -1,5 +1,11 @@
 """
-Basic calulator that abides by BODMAS
+Basic calulator that abides by BODMAS. This calculator will only work with whole numbers and uses brackets
+
+Issues:
+Can't do simple calculations
+Has issues replacing parts of the calculated equation
+No error handling at the moment so it won't account for letters or lack of opening/closing brackets
+
 Some scenarios:
 
 2+2-3
@@ -14,7 +20,17 @@ Some scenarios:
     = 9/9
     = 1
 """
+
+
 def retNumbers(equat, ope, op):
+    '''
+    This function is to get the number of positions to replace or to get the whole number before the next non character.
+    :param equat: the equation such as 2+222/45
+    :param ope: the arithemetic operation such as +-/*
+    :param op: whether to get the number or position. So either n or p should be supplied
+    :return: either the two numbers or number of positions in an array
+    '''
+
     num = []
     num1 = ""
     num2 = ""
@@ -54,6 +70,11 @@ def retNumbers(equat, ope, op):
 
 
 def calculate(equat):
+    """
+    This will do the calculation based on the operation and then replace that part of the string with the answer
+    :param equat: the equation to calculate
+    :return: the calculated answer
+    """
     brack = equat
     while type(brack) is str:
 
@@ -97,6 +118,12 @@ def calculate(equat):
 
 
 def brackets(equat):
+    """
+    Determin that last set of brackets in the equatoin and then calculate and replace it. For example 2*(5+(17-7))
+    should calculate and return 2*(5+10)
+    :param equat: equation which should contain brackets
+    :return: return the equation with the most inner brackets calculated and replaced
+    """
     brack = equat[equat.rfind("(") + 1:equat.find(")")]
     outer = equat[equat.rfind("("):equat.find(")") + 1]
     answer = calculate(brack)
@@ -106,13 +133,18 @@ def brackets(equat):
 
 
 def calculator(equat):
+    """
+    Base function to loop and call the other functions until an integer which would represent the answer is available.
+    :param equat: the equation given by the user
+    :return: the answer of the equation
+    """
     answer = equat.strip(" ")
     test = ""
 
     if "(" in answer:
         test = brackets(answer)
     else:
-        test = calculate(test)
+        test = calculate(answer)
     try:
         test = int(test)
         return test
@@ -136,7 +168,7 @@ def calculator(equat):
 
 
 # equation = input("Enter your equation")
-equation = "2+2"
+equation = "2+2 * (6/3)"
 print("Answer: ", calculator(equation))
 
 # print(brackets("8*(4+(3+9)-3)"))
