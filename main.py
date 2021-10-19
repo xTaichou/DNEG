@@ -3,6 +3,8 @@ This is just a file I used to test parts of the other projects such as the split
 equations.
 """
 
+from datetime import datetime
+
 import random
 import urllib.request
 from random_word import RandomWords
@@ -68,4 +70,29 @@ print(r.get_random_word())
 # Return list of Random words
 r.get_random_words()
 # Return Word of the day
-print(r.word_of_the_day())
+# print(r.word_of_the_day())
+
+now = datetime.now()
+print("Time: ", now.strftime("%H:%M"), " Day: ", now.strftime("%Y-%m-%d"))
+# print(time == now.strftime("%Y-%m-%d"))
+print(now.strftime("%Y-%m-%d %H:%M"))
+
+# import vlc
+
+# importing pafy module
+# import pafy
+
+# url of the video
+url = "https://www.youtube.com/watch?v=LrHN9Lwo6d4"
+
+# # creating pafy object of the video
+# video = pafy.new(url)
+# best = video.getbest()
+# media = vlc.MediaPlayer(best.url)
+# media.play()
+
+import webbrowser
+webbrowser.open("https://www.youtube.com/watch?v=LrHN9Lwo6d4", new=2)
+
+
+
