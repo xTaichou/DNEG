@@ -1,10 +1,8 @@
 """
 Basic calulator that abides by BODMAS. This calculator will only work with whole numbers and uses brackets
 
-Issues:
-Can't do simple calculations
-Has issues replacing parts of the calculated equation
-No error handling at the moment so it won't account for letters or lack of opening/closing brackets
+Next iteration:
+Include error handling as it doesn't account for letters or lack of opening/closing brackets
 
 Some scenarios:
 
@@ -76,40 +74,35 @@ def calculate(equat):
     :return: the calculated answer
     """
     brack = equat
-    while type(brack) is str:
+    while True:
 
         if "/" in brack:
             # do operation
             # replace section of equation
             num = retNumbers(brack, "/", "n")
             answer = int(num[0] / num[1])
-            brack = brack.replace(brack[brack.find("/") + retNumbers(equat, "/", "p")[0]:
-                                        brack.find("/") + retNumbers(equat, "/", "p")[1]+1], str(answer))
-            print(brack)
+            brack = brack.replace(brack[brack.find("/") + retNumbers(brack, "/", "p")[0]:
+                                        brack.find("/") + retNumbers(brack, "/", "p")[1]+1], str(answer))
 
-        if "*" in brack:
+        elif "*" in brack:
             num = retNumbers(brack, "*", "n")
-            print(num)
             answer = num[0] * num[1]
-            brack = brack.replace(brack[brack.find("*") + retNumbers(equat, "*", "p")[0]:
-                                        brack.find("*") + retNumbers(equat, "*", "p")[1]+1], str(answer))
-            print(brack)
+            brack = brack.replace(brack[brack.find("*") + retNumbers(brack, "*", "p")[0]:
+                                        brack.find("*") + retNumbers(brack, "*", "p")[1]+1], str(answer))
 
-        if "+" in brack:
+        elif "+" in brack:
             num = retNumbers(brack, "+", "n")
             answer = num[0] + num[1]
-            brack = brack.replace(brack[brack.find("+") + retNumbers(equat, "+", "p")[0]:
-                                        brack.find("+") + retNumbers(equat, "+", "p")[1]+1], str(answer))
-            print(brack)
+            brack = brack.replace(brack[brack.find("+") + retNumbers(brack, "+", "p")[0]:
+                                        brack.find("+") + retNumbers(brack, "+", "p")[1]+1], str(answer))
 
-        if "-" in brack:
+        elif "-" in brack:
             num = retNumbers(brack, "-", "n")
             answer = num[0] - num[1]
-            brack = brack.replace(brack[brack.find("-") + retNumbers(equat, "-", "p")[0]:
-                                        brack.find("-") + retNumbers(equat, "-", "p")[1]+1], str(answer))
-            print(brack)
+            brack = brack.replace(brack[brack.find("-") + retNumbers(brack, "-", "p")[0]:
+                                        brack.find("-") + retNumbers(brack, "-", "p")[1]+1], str(answer))
         try:
-            answer = int(brack)
+            brack = int(brack)
             break
         except Exception:
             pass
@@ -138,37 +131,21 @@ def calculator(equat):
     :param equat: the equation given by the user
     :return: the answer of the equation
     """
-    answer = equat.strip(" ")
-    test = ""
+    answer = equat.replace(" ", "")
+    while "(" in answer:
+        answer = brackets(answer)
 
-    if "(" in answer:
-        test = brackets(answer)
-    else:
-        test = calculate(answer)
-    try:
-        test = int(test)
-        return test
-    except Exception:
-        while type(test) is str:
-            print("calc", test)
-            if "(" in test:
-                test = brackets(test)
-            else:
-                test = calculate(test)
-            try:
-                test = int(test)
-                break
-            except Exception:
-                pass
+    print(answer)
+    answer = calculate(answer)
 
-    return test
+    return answer
 
 
 
 
 
 # equation = input("Enter your equation")
-equation = "2+2 * (6/3)"
+equation = "9/(27/3)"
 print("Answer: ", calculator(equation))
 
 # print(brackets("8*(4+(3+9)-3)"))
