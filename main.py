@@ -92,7 +92,74 @@ url = "https://www.youtube.com/watch?v=LrHN9Lwo6d4"
 # media.play()
 
 import webbrowser
-webbrowser.open("https://www.youtube.com/watch?v=LrHN9Lwo6d4", new=2)
+# webbrowser.open("https://www.youtube.com/watch?v=LrHN9Lwo6d4", new=2)
+
+
+import tkinter as tk
+import tkinter.font as tkFont
+
+class App:
+    def __init__(self, root):
+        #setting title
+        root.title("undefined")
+        #setting window size
+        width=428
+        height=360
+        screenwidth = root.winfo_screenwidth()
+        screenheight = root.winfo_screenheight()
+        alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
+        root.geometry(alignstr)
+        root.resizable(width=False, height=False)
+
+        GListBox_513=tk.Listbox(root)
+        GListBox_513["borderwidth"] = "1px"
+        ft = tkFont.Font(family='Times',size=10)
+        GListBox_513["font"] = ft
+        GListBox_513["fg"] = "#333333"
+        GListBox_513["justify"] = "center"
+        GListBox_513.place(x=10,y=20,width=115,height=320)
+
+        GLabel_447=tk.Label(root)
+        ft = tkFont.Font(family='Times',size=10)
+        GLabel_447["font"] = ft
+        GLabel_447["fg"] = "#333333"
+        GLabel_447["justify"] = "center"
+        GLabel_447["text"] = "label"
+        GLabel_447.place(x=140,y=20,width=272,height=30)
+
+        GButton_810=tk.Button(root)
+        GButton_810["bg"] = "#ffffff"
+        ft = tkFont.Font(family='Times',size=10)
+        GButton_810["font"] = ft
+        GButton_810["fg"] = "#040404"
+        GButton_810["justify"] = "center"
+        GButton_810["text"] = "New File"
+        GButton_810.place(x=150,y=320,width=70,height=25)
+        GButton_810["command"] = self.GButton_810_command
+
+        GButton_392=tk.Button(root)
+        GButton_392["bg"] = "#ffffff"
+        ft = tkFont.Font(family='Times',size=10)
+        GButton_392["font"] = ft
+        GButton_392["fg"] = "#000000"
+        GButton_392["justify"] = "center"
+        GButton_392["text"] = "Exit"
+        GButton_392.place(x=340,y=320,width=70,height=25)
+        GButton_392["command"] = self.GButton_392_command
+
+    def GButton_810_command(self):
+        print("command")
+
+
+    def GButton_392_command(self):
+        print("command")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = App(root)
+    root.mainloop()
+
+
 
 
 
